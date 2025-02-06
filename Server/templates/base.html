@@ -1,0 +1,344 @@
+<html>
+
+<head>
+    {% block common_header %}
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='Assets/favicon_io/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='Assets/favicon_io/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='Assets/favicon_io/favicon-16x16.png')}}">
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico')}}">
+    <link rel="manifest" href="{{url_for('static', filename='Assets/favicon_io/site.webmanifest')}}">
+    <link rel="canonical" href="https://www.sifafx.com/">
+    <meta http-equiv="Content-Language" content="en">
+    <meta content="origin-when-cross-origin" name="referrer">
+    <meta property="og:image:secure_url"
+    content="https://res.cloudinary.com/dwaet6cyt/image/upload/v1736273830/Sifafx_image_ug5oh1.png">
+    <meta property="og:image" content="https://res.cloudinary.com/dwaet6cyt/image/upload/v1736273655/logo_t3qzjl.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{url_for('static', filename='output.css') }}">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    {% endblock %}
+
+    {% block header %}
+    <meta name="title" content="Revolutionize Your Trading with Sifafx">
+    <meta name="description" content="Explore cutting-edge automated trading solutions tailored for your success.">
+    <meta property="og:title" content="Revolutionize Your Trading with Sifafx">
+    <meta property="og:description" content="Explore cutting-edge automated trading solutions tailored for your success."> 
+
+    {% endblock %}
+
+    {% block custom_styles %} {% endblock %}
+</head>
+
+<body>
+    {% block Navbar %}
+    <nav class="fixed top-0 left-0 w-full bg-black py-7 px-4 z-50 lg:px-10">
+        <div class="flex justify-between items-center  space-x-7  ">
+            <!-- Logo -->
+            <div><a href="{{ url_for('home') }}" class="text-white text-lg font-light">SifaFx</a></div>
+
+            <!-- Desktop Menu - Hidden on medium and small screens -->
+            <div class="hidden lg:flex space-x-6">
+                <a href="{{ url_for('home') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">Home</a>
+
+                <a href="{{ url_for('home') }}#about"
+                    class="text-white text-sm lg:tracking-widest  font-light hover:underline underline-offset-8 decoration-2">About</a>
+                <a href="{{ url_for('services') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">Services</a>
+                <a href="{{ url_for('howwework') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">How
+                    We Work</a>
+            </div>
+
+            <!-- Desktop Appointment Button - Hidden on medium and small screens -->
+            <a href="{{ url_for('booking') }}"
+                class="hidden lg:flex border border-white py-2 px-2 text-white text-md font-light tracking-widest transition-colors duration-300 hover:bg-[#c19957] hover:text-black hover:border-transparent">
+                Book Appointment
+            </a>
+
+            <!-- Hamburger Menu - Visible only on medium and small screens -->
+            <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </nav>
+    {% endblock %}
+
+
+    <!-- Full-screen Mobile Menu -->
+     {% block MobileMenu %}
+    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden">
+        <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
+            <a href="{{ url_for('home') }}" class="text-white text-md font-light  border-b w-full pb-2">Home</a>
+            <a href="{{ url_for('home') }}#about" class="text-white text-md font-light border-b w-full pb-2">About</a>
+            <a href="{{ url_for('services') }}" class="text-white text-md font border-b w-full pb-2">Services</a>
+            <a href="{{ url_for('howwework') }}" class="text-white text-md font-light">How We Work</a>
+            <a href="{{ url_for('booking') }}"
+                class=" w-full border border-white py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-[#c19957] hover:text-black hover:border-transparent">
+                Book Appointment
+            </a>
+
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="relative text-left text-white " id="home">
+        <div class="relative">
+
+            <img src="{{url_for('static', filename='Assets/hero_image.jpeg')}}"
+                alt="Office interior with a large table and chairs, and a sofa in the background"
+                class="grayscale w-full h-full object-cover brightness-[65%]" />
+            <div class="content p-6 absolute top-1/3 lg:top-75 lg:left-44">
+                <h1
+                    class="text-[40px] font-light md:text-[56px] lg:text-7xl mb-2.5 animation1 delay11 w-full lg:w-2/3 ">
+                    Automate your trading
+                </h1>
+                <p class="text-[20px] mb-2.5 animation2 delay10">
+                    Revolutionize your trading with automation
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class=" text-white absolute success-message md:success-message1  w-4/5  h-10 bg-black z-50 p-2" id="success-message">
+        
+            <div class="check-div rounded-lg">
+                <i class='relative bx bxs-check-circle rounded-[50%] text-[25px] bg-white '></i>
+            </div>
+    </div>
+    
+
+
+    <div class="p-5 bg-[#c19957] text-center md:pd-10 lg:pb-0" id="about">
+        <div
+            class=" py-10 w-full md:h-[70%] flex-col justify-center align-center md:px-20 md:pt-10 md:pb-16 lg:h-[90%] lg:pt-16 lg:space-y-8 lg:pb- text-white">
+            <h1 class="text-[40px] md:text-[56px] lg:text-7xl font-light mb-2.5 animation2 delay">
+                Empowering traders
+            </h1>
+            <h2 class="md:text-[22px] font-light lg:text-[28px] mb-5 animation2 delay0">
+                Your partner in automated trading
+            </h2>
+            <p class="text-m mb-5 w-full md:w-4/5 lg:w-3/5 text-center mx-auto  font-light animation2 delay1">
+                At Sifafx, we empower traders to navigate the financial markets with confidence and precision. We
+                combine financial expertise with cutting-edge technology to create automated trading strategies that are
+                accessible
+                for everyone.
+            </p>
+            <p class="text-m w-full mb-5 mx-auto md:w-4/5 lg:w-3/5 font-light animation2 delay2">
+                Our mission is to enhance decision-making, minimize emotional biases, and optimize performance
+                through
+                innovative solutions.
+            </p>
+            <a href="{{ url_for('booking') }}"
+                class="cta-btn bg-black text-white px-8 py-2 text-lg lg:text-[18px] inline-block  font-light mt-3 mx-2.5 animation2 delay3">
+                Schedule appointment
+            </a>
+        </div>
+    </div>
+
+
+    <div class="gallery bg-[#1c1f1f] py-20">
+        <div class="gallery-wrapper flex flex-wrap justify-center lazy-container">
+
+            <img alt="Modern office interior with glass walls and concrete floor"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(0)" data-src="{{url_for('static', filename='Assets/image1.jpg')}}" />
+
+            <img alt="Night view of a city with illuminated skyscrapers"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(1)" data-src="{{url_for('static', filename='Assets/image2.jpg')}}" />
+
+            <img alt="Black and white aerial view of a city with tall buildings"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(2);" data-src="{{url_for('static', filename='Assets/image3.jpg')}}" />
+        </div>
+    </div>
+
+    <div id="myModal" class="hidden modal bg-black  fixed inset-0 z-50   w-full h-full flex-col ">
+
+        <div id="progress" class=" hidden relative w-full">
+            <div id="progressBar" class="absolute top-0 left-0 h-[2px] bg-red-500 w-0"></div>
+        </div>
+
+        <div
+            class="control-bar grid grid-cols-1  text-white w-full justify-items-center lg:grid-cols-3 lg:justify-items-center">
+            <div id="imageCounter" class="hidden lg:block image-counter lg:justify-self-start ">1 / 3</div>
+
+            <div
+                class="bar grid grid-cols-4 w-2/5 justify-items-center gap-2 bg-gray-900/20 rounded font-light lg:grid-cols-3">
+
+                <i class='bx bx-search text-md content-center text-[#ccc]' id="zoom-in" onclick="zoomIn()"></i>
+                <i class='bx bx-play text-xl content-center text-[#ccc]' id="play" onclick="playSlide()"></i>
+                <i class='bx bx-pause text-xl content-center text-[#ccc] hidden' id="pause" onclick="pauseSlide()"></i>
+                <i class='bx bxs-grid text-xl content-center text-[#ccc]' onclick="openThumbnails()"></i>
+                <i class='bx bx-x text-2xl content-center text-[#ccc] lg:hidden ' onclick="closeModal()"></i>
+
+            </div>
+
+            <div class=" hidden lg:block bg-black/20 rounded lg:justify-self-end mr-2" onclick="closeModal()"><i
+                    class='bx bx-x text-2xl content-center text-[#ccc]'></i></div>
+
+        </div>
+
+        <div class=" main-modal bg-black flex w-full h-4/5 justify-center align-center">
+
+            <div class="bg-black-80 flex justify-center align-center text-white modal-content px-10">
+
+                <div class="flex justify-center items-center ">
+
+                    <div id="lbutton"
+                        class=" absolute flex items-center justify-center z-50 left-3 bg-black/50 rounded-full w-[40px] h-[40px] md:left-[4.5rem] lg:left-36 ">
+                        <i class="fas fa-chevron-left  z-50  " onclick="changeSlide(-1)"></i>
+                    </div>
+                    <img id="modalImage" class="w-full h-full object-contain" src="{{url_for('static', filename='Assets/image1.jpg')}}"
+                        alt="Image not found" />
+                    <div id="rbutton"
+                        class=" absolute flex items-center justify-center z-50 right-4 bg-black/50 rounded-full w-[40px] h-[40px] md:right-[4.5rem] lg:right-36 ">
+                        <i class="fas fa-chevron-right z-50 " onclick="changeSlide(1)"></i>
+                    </div>
+
+                    <div id="imageCount"
+                        class="absolute flex z-50 bottom-8 image-count  text-md md:text-2xl lg:text-3xl text-white ">
+                        1
+                    </div>
+                </div>
+            </div>
+
+            <div id="thumbnails-grid" class=" hidden thumbnail-container w-3/5 lg:w-2/5  justify-center ">
+                <div class="thumbnail-list grid grid-rows-3 gap-0 w-full justify-start content-start">
+                    <!-- Thumbnails will be dynamically added here -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Thumbnail container -->
+
+    </div>
+
+    <div class="container3 bg-[#121414] text-white p-5 lg:h-4/6 ">
+
+        <div class="container mx-auto py-16 px-4 md:px-16 lg:grid lg:grid-rows-2 lg:h-full lg:w-full  xl:px-32 ">
+            <div class="flex flex-col text-left justify-center h-2/8 lg:h-3 lg:grid lg:justify-start  ">
+                <h1 class="text-[28px] lg:text-[48px] text-[#c19957]  mb-2">Get in touch</h1>
+                <p class="text-xl lg:text-[28px] text-white mb-2">We're here to assist you!</p>
+            </div>
+            <div class="mt-8 flex flex-col text-[#dbdbdb] justify-start lg:h-1/5 lg:grid lg:grid-cols-3 lg:mt-0   ">
+                <!-- Contact Information -->
+                <div class="mb-8 ">
+                    <div class="flex items-center justify-start  mb-2">
+                        <i class="fas fa-phone-alt text-lg mr-2"></i>
+                        <span class="text-lg font-light underline underline-offset-8 decoration-2">+254717829969</span>
+                    </div>
+                    <div class="flex items-center justify-start ">
+                        <i class="fas fa-envelope text-lg  mr-2"></i>
+                        <span
+                            class="text-lg font-light underline underline-offset-8 decoration-2">admin@sifax.com</span>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-8 ">
+                    <div class="grid items-center justify-start mb-2 lg:grid   ">
+
+                        <p class="text-lg font-bold">Location</p>
+                        <p class="text-lg mb-4"><i class="fas fa-map-marker-alt text-lg mr-2"></i>Nairobi, KE</p>
+                        <span class="hidden lg:block"><iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215726.85918867835!2d36.84739685!3d-1.3032089500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e1!3m2!1sen!2ske!4v1735271089886!5m2!1sen!2ske"
+                                width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe></span>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class=" lg:w-full ">
+                    <h2 class="text-lg  font-bold mb-2">Hours</h2>
+                    <div class="text-lg md:text-lg">
+                        <p>Monday <span class="ml-12">10:00am - 10:00pm</span></p>
+                        <p>Tuesday <span class="ml-11">10:00am - 10:00pm</span></p>
+                        <p>Wednesday <span class="ml-3.5">10:00am - 10:00pm</span></p>
+                        <p>Thursday <span class="ml-9">10:00am - 10:00pm</span></p>
+                        <p>Friday <span class="ml-16">10:00am - 10:00pm</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block Footer %}
+
+    <footer class="bg-black text-white max-h-xl h-2/4 p-5 grid grid-cols-1 items-center justify-center">
+        <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col md:flex-row md:justify-around md:items-center w-full max-w-4xl px-4 py-8 
+            lg:justify-between">
+                <div class="text-center md:text-center mb-8 md:mb-0">
+                    <h1 class="text-start text-lg tracking-widest ">Sifafx</h1>
+                </div>
+                <div class="text-start mb-8 md:mb-0">
+                    <h1 class="text-xl mb-1">Location</h1>
+                    <a href="https://maps.app.goo.gl/PZDb1RLe51Rx76e7A" class="underline underline-offset-4">Nairobi
+                        KE</a>
+                </div>
+                <div class="text-start md:text-right">
+                    <h1 class="text-xl font-light tracking-wider mb-1">Reach out</h1>
+                    <p><a href="mailto:admin@sifax.com" class="underline underline-offset-4">admin@sifafx.com</a></p>
+                    <p><a href="tel:+254717820960" class="underline underline-offset-4">+254717829969</a></p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+{% endblock %}
+
+{% block ToggleMenu %}
+<script>
+
+    function toggleMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+    }
+</script>
+    {% endblock %}
+
+    {% block customScript %} {% endblock %}
+
+    {% block SuccessMessageScript %}
+    <script>
+
+        const successMessage = sessionStorage.getItem('formSuccessMessage');
+        const successmessageElement = document.getElementById('success-message')
+        if (successMessage) {
+            // Display the success message in a div or alert box
+
+            successmessageElement.textContent = successMessage;
+            successmessageElement.classList.remove('hidden')
+
+            // Clear the message from sessionStorage after displaying it
+            sessionStorage.removeItem('formSuccessMessage');
+        } else {
+            successmessageElement.classList.add('hidden')
+        }
+    </script>
+    {% endblock %}
+

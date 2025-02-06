@@ -1,0 +1,537 @@
+{% extends 'base.html' %}
+
+
+
+    {% block header %}
+ 
+
+    <title>Revolutionize Your Trading with Sifafx</title>
+    <link rel="canonical" href="https://www.sifafx.com/">
+    <meta name="title" content="Revolutionize Your Trading with Sifafx">
+    <meta name="description" content="Explore cutting-edge automated trading solutions tailored for your success.">
+    <meta property="og:title" content="Revolutionize Your Trading with Sifafx">
+    <meta property="og:description" content="Explore cutting-edge automated trading solutions tailored for your success.">
+    {% endblock %}
+
+    {% block custom_styles %}
+    <style>
+        body,
+        .raleway {
+            font-family: "Raleway", serif;
+
+        }
+
+        lazy {
+            transition: opacity ease 0.7s;
+        }
+
+        @keyframes comeUp {
+            from {
+                transform: translateY(200px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+
+
+        .animation1 {
+            animation-name: comeUp;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        .animation2 {
+
+            animation-name: slideUp;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        .animation1 .animate {
+            opacity: 0;
+        }
+
+        .animation2 .animate {
+            opacity: 0;
+        }
+
+        .delay {
+            animation: slideUp .4s ease-in-out .2s;
+        }
+
+        .delay0 {
+            animation: slideUp .5s ease-in-out .3s;
+        }
+
+        .delay1 {
+            animation: slideUp .6s ease-in-out 0.4s;
+        }
+
+        .delay2 {
+            animation: slideUp .7s ease-in-out 0.5s;
+        }
+
+        .delay3 {
+            animation: slideUp .8s ease-in-out 0.6s;
+        }
+
+        .delay9 {
+            animation: comeUp .4s ease-in-out .2s;
+        }
+
+        .delay10 {
+            animation: comeUp .5s ease-in-out .3s;
+        }
+
+        .delay11 {
+            animation: comeUp .6s ease-in-out 0.4s;
+        }
+
+        .delay12 {
+            animation: comeUp .7s ease-in-out 0.5s;
+        }
+
+        .delay13 {
+            animation: comeUp .8s ease-in-out 0.6s;
+        }
+
+        .thumbnail.active {
+            border: 2px solid white;
+        }
+
+        .success-message {
+            top: 35rem;
+
+        }
+
+        .success-message1 {
+            top: 40rem;
+
+        }
+
+        .bxs-check-circle {
+            color: rgb(42, 150, 28);
+
+
+
+        }
+    </style>
+    {% endblock %}
+
+
+
+<body>
+
+
+    {% block content %}
+    <div class="relative text-left text-white " id="home">
+        <div class="relative">
+
+            <img src="{{url_for('static', filename='Assets/hero_image.jpeg')}}"
+                alt="Office interior with a large table and chairs, and a sofa in the background"
+                class="grayscale w-full h-full object-cover brightness-[65%]" />
+            <div class="content p-6 absolute top-1/3 lg:top-75 lg:left-44">
+                <h1
+                    class="text-[40px] font-light md:text-[56px] lg:text-7xl mb-2.5 animation1 delay11 w-full lg:w-2/3 ">
+                    Automate your trading
+                </h1>
+                <p class="text-[20px] mb-2.5 animation2 delay10">
+                    Revolutionize your trading with automation
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class=" text-white absolute success-message md:success-message1  w-4/5  h-10 bg-black z-50 p-2" id="success-message">
+        
+            <div class="check-div rounded-lg">
+                <i class='relative bx bxs-check-circle rounded-[50%] text-[25px] bg-white '></i>
+            </div>
+    </div>
+<x></x>
+    <div class="p-5 bg-[#c19957] text-center md:pd-10 lg:pb-0" id="about">
+        <div
+            class=" py-10 w-full md:h-[70%] flex-col justify-center align-center md:px-20 md:pt-10 md:pb-16 lg:h-[90%] lg:pt-16 lg:space-y-8 lg:pb- text-white">
+            <h1 class="text-[40px] md:text-[56px] lg:text-7xl font-light mb-2.5 animation2 delay">
+                Empowering traders
+            </h1>
+            <h2 class="md:text-[22px] font-light lg:text-[28px] mb-5 animation2 delay0">
+                Your partner in automated trading
+            </h2>
+            <p class="text-m mb-5 w-full md:w-4/5 lg:w-3/5 text-center mx-auto  font-light animation2 delay1">
+                At Sifafx, we empower traders to navigate the financial markets with confidence and precision. We
+                combine financial expertise with cutting-edge technology to create automated trading strategies that are
+                accessible
+                for everyone.
+            </p>
+            <p class="text-m w-full mb-5 mx-auto md:w-4/5 lg:w-3/5 font-light animation2 delay2">
+                Our mission is to enhance decision-making, minimize emotional biases, and optimize performance
+                through
+                innovative solutions.
+            </p>
+            <a href="Booking.html"
+                class="cta-btn bg-black text-white px-8 py-2 text-lg lg:text-[18px] inline-block  font-light mt-3 mx-2.5 animation2 delay3">
+                Schedule appointment
+            </a>
+        </div>
+    </div>
+
+
+    <div class="gallery bg-[#1c1f1f] py-20">
+        <div class="gallery-wrapper flex flex-wrap justify-center lazy-container">
+
+            <img alt="Modern office interior with glass walls and concrete floor"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(0)" data-src="{{url_for('static', filename='Assets/image1.jpg')}}" />
+
+            <img alt="Night view of a city with illuminated skyscrapers"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(1)" data-src="{{url_for('static', filename='Assets/image2.jpg')}}" />
+
+            <img alt="Black and white aerial view of a city with tall buildings"
+                class="w-72 h-72 mx-2 my-4 object-cover cursor-pointer transition-transform duration-300 hover:scale-105 lazy opacity-0"
+                onclick="openModal(2);" data-src="{{url_for('static', filename='Assets/image3.jpg')}}" />
+        </div>
+    </div>
+
+    <div id="myModal" class="hidden modal bg-black  fixed inset-0 z-50   w-full h-full flex-col ">
+
+        <div id="progress" class=" hidden relative w-full">
+            <div id="progressBar" class="absolute top-0 left-0 h-[2px] bg-red-500 w-0"></div>
+        </div>
+
+        <div
+            class="control-bar grid grid-cols-1  text-white w-full justify-items-center lg:grid-cols-3 lg:justify-items-center">
+            <div id="imageCounter" class="hidden lg:block image-counter lg:justify-self-start ">1 / 3</div>
+
+            <div
+                class="bar grid grid-cols-4 w-2/5 justify-items-center gap-2 bg-gray-900/20 rounded font-light lg:grid-cols-3">
+
+                <i class='bx bx-search text-md content-center text-[#ccc]' id="zoom-in" onclick="zoomIn()"></i>
+                <i class='bx bx-play text-xl content-center text-[#ccc]' id="play" onclick="playSlide()"></i>
+                <i class='bx bx-pause text-xl content-center text-[#ccc] hidden' id="pause" onclick="pauseSlide()"></i>
+                <i class='bx bxs-grid text-xl content-center text-[#ccc]' onclick="openThumbnails()"></i>
+                <i class='bx bx-x text-2xl content-center text-[#ccc] lg:hidden ' onclick="closeModal()"></i>
+
+            </div>
+
+            <div class=" hidden lg:block bg-black/20 rounded lg:justify-self-end mr-2" onclick="closeModal()"><i
+                    class='bx bx-x text-2xl content-center text-[#ccc]'></i></div>
+
+        </div>
+
+        <div class=" main-modal bg-black flex w-full h-4/5 justify-center align-center">
+
+            <div class="bg-black-80 flex justify-center align-center text-white modal-content px-10">
+
+                <div class="flex justify-center items-center ">
+
+                    <div id="lbutton"
+                        class=" absolute flex items-center justify-center z-50 left-3 bg-black/50 rounded-full w-[40px] h-[40px] md:left-[4.5rem] lg:left-36 ">
+                        <i class="fas fa-chevron-left  z-50  " onclick="changeSlide(-1)"></i>
+                    </div>
+                    <img id="modalImage" class="w-full h-full object-contain" src="{{url_for('static', filename='Assets/image1.jpg')}}"
+                        alt="Image not found" />
+                    <div id="rbutton"
+                        class=" absolute flex items-center justify-center z-50 right-4 bg-black/50 rounded-full w-[40px] h-[40px] md:right-[4.5rem] lg:right-36 ">
+                        <i class="fas fa-chevron-right z-50 " onclick="changeSlide(1)"></i>
+                    </div>
+
+                    <div id="imageCount"
+                        class="absolute flex z-50 bottom-8 image-count  text-md md:text-2xl lg:text-3xl text-white ">
+                        1
+                    </div>
+                </div>
+            </div>
+
+            <div id="thumbnails-grid" class=" hidden thumbnail-container w-3/5 lg:w-2/5  justify-center ">
+                <div class="thumbnail-list grid grid-rows-3 gap-0 w-full justify-start content-start">
+                    <!-- Thumbnails will be dynamically added here -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Thumbnail container -->
+
+    </div>
+
+    <div class="container3 bg-[#121414] text-white p-5 lg:h-4/6 ">
+
+        <div class="container mx-auto py-16 px-4 md:px-16 lg:grid lg:grid-rows-2 lg:h-full lg:w-full  xl:px-32 ">
+            <div class="flex flex-col text-left justify-center h-2/8 lg:h-3 lg:grid lg:justify-start  ">
+                <h1 class="text-[28px] lg:text-[48px] text-[#c19957]  mb-2">Get in touch</h1>
+                <p class="text-xl lg:text-[28px] text-white mb-2">We're here to assist you!</p>
+            </div>
+            <div class="mt-8 flex flex-col text-[#dbdbdb] justify-start lg:h-1/5 lg:grid lg:grid-cols-3 lg:mt-0   ">
+                <!-- Contact Information -->
+                <div class="mb-8 ">
+                    <div class="flex items-center justify-start  mb-2">
+                        <i class="fas fa-phone-alt text-lg mr-2"></i>
+                        <span class="text-lg font-light underline underline-offset-8 decoration-2">+254717829969</span>
+                    </div>
+                    <div class="flex items-center justify-start ">
+                        <i class="fas fa-envelope text-lg  mr-2"></i>
+                        <span
+                            class="text-lg font-light underline underline-offset-8 decoration-2">admin@sifax.com</span>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-8 ">
+                    <div class="grid items-center justify-start mb-2 lg:grid   ">
+
+                        <p class="text-lg font-bold">Location</p>
+                        <p class="text-lg mb-4"><i class="fas fa-map-marker-alt text-lg mr-2"></i>Nairobi, KE</p>
+                        <span class="hidden lg:block"><iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215726.85918867835!2d36.84739685!3d-1.3032089500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e1!3m2!1sen!2ske!4v1735271089886!5m2!1sen!2ske"
+                                width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe></span>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class=" lg:w-full ">
+                    <h2 class="text-lg  font-bold mb-2">Hours</h2>
+                    <div class="text-lg md:text-lg">
+                        <p>Monday <span class="ml-12">10:00am - 10:00pm</span></p>
+                        <p>Tuesday <span class="ml-11">10:00am - 10:00pm</span></p>
+                        <p>Wednesday <span class="ml-3.5">10:00am - 10:00pm</span></p>
+                        <p>Thursday <span class="ml-9">10:00am - 10:00pm</span></p>
+                        <p>Friday <span class="ml-16">10:00am - 10:00pm</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+
+
+
+
+ 
+
+    {% block customScript %}
+    <script>
+        /*Functions here: 
+        1. 
+        2. Carousel toggle on/off, slide to prev and next.
+        3. Toggle Thumbnails on/off, slide through thumbnails.
+        4. Play, Pause and Seek. 
+        5. Zoom in and out.
+
+    
+        */
+
+
+        let currentSlide = 0;
+        const images = [
+            "static/Assets/image1.jpg",
+            "static/Assets/image2.jpg",
+            "static/Assets/image3.jpg"
+        ];
+        imageNO = images.length
+
+
+        function openModal(index) {
+            currentSlide = index;
+            document.getElementById('myModal').style.display = "block";
+            document.body.classList.add("no-scroll");
+            showSlide(currentSlide);
+            changeThumbnail(currentSlide);
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+            document.body.classList.remove("no-scroll");
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+
+            if (currentSlide >= images.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = images.length - 1;
+            }
+
+            showSlide(currentSlide);
+            changeThumbnail(currentSlide);
+            updateProgressBar();
+        }
+
+        function showSlide(index) {
+            const modalImage = document.getElementById('modalImage');
+            const imageCounter = document.getElementById('imageCounter');
+            const imageCount = document.getElementById('imageCount')
+
+            if (modalImage && imageCounter) {
+                modalImage.src = images[index];
+                imageCounter.innerText = (index + 1) + " / " + images.length;
+                imageCount.innerText = (index + 1);
+            } else {
+                console.error("modalImage or imageCounter not found!");
+            }
+            updateProgressBar();
+        }
+
+        function changeThumbnail(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            thumbnails.forEach((thumbnail, i) => {
+                thumbnail.classList.remove('active');
+                if (i === index) {
+                    thumbnail.classList.add('active');
+                }
+            });
+        }
+
+        function openThumbnails() {
+            const openthumbs = document.getElementById('thumbnails-grid');
+            const rightbutton = document.getElementById('rbutton');
+            const leftbutton = document.getElementById('lbutton');
+
+            if (openthumbs.classList.contains('hidden')) {
+                openthumbs.classList.remove('hidden');
+                rightbutton.classList.add('right-[4rem]', 'md:right-[8rem]', 'lg:right-[15rem]', 'xl:right-[20rem]');
+                rightbutton.classList.remove('right-4', 'lg:right-12');
+                leftbutton.classList.add('md:left-[1rem]')
+            } else {
+                openthumbs.classList.add('hidden');
+                rightbutton.classList.add('right-4', 'lg:right-12');
+                rightbutton.classList.remove('right-[4rem]', 'md:right-[8rem]', 'lg:right-[15rem]');
+                leftbutton.classList.remove('md:left-[1rem]');
+
+            }
+
+        }
+        // Dynamically create thumbnails
+        const thumbnailList = document.querySelector('.thumbnail-list');
+        images.forEach((image, index) => {
+            const thumbnail = document.createElement('div');
+            thumbnail.classList.add('thumbnail', 'rounded-lg', 'h-[30%]');
+            thumbnail.setAttribute('onclick', `openModal(${index})`);
+
+
+            const thumbnailImage = document.createElement('img');
+            thumbnailImage.src = image;
+            thumbnailImage.alt = `Thumbnail ${index + 1}`;
+            thumbnailImage.classList.add('max-w-full', 'max-h-full', 'object-contain');
+
+
+            thumbnail.appendChild(thumbnailImage);
+            thumbnailList.appendChild(thumbnail);
+        });
+
+        // Initial thumbnail activation
+        const initialThumbnail = document.querySelector('.thumbnail');
+        initialThumbnail.classList.add('active');
+
+
+        let playInterval;
+        let progressInterval;
+        const playbtn = document.getElementById('play');
+        const pausebtn = document.getElementById('pause');
+        const progressdiv = document.getElementById('progress');
+        const progressBar = document.getElementById('progressBar');
+
+        function playSlide() {
+
+            playInterval = setInterval(() => changeSlide(1), 2000);
+
+            pausebtn.classList.remove('hidden');
+            playbtn.classList.add('hidden');
+            progressdiv.classList.remove('hidden');
+            progressdiv.classList.add('seek')
+
+
+
+        }
+
+        function pauseSlide() {
+
+            clearInterval(playInterval);
+
+            playbtn.classList.remove('hidden');
+            pausebtn.classList.add('hidden');
+            progressdiv.classList.add('hidden');
+
+        }
+
+        function updateProgressBar() {
+            let progressPercent = ((currentSlide + 1) / images.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+        }
+
+        updateProgressBar();
+
+        //----------- ---------- Incomplete
+        function zoomIn(image) {
+            if (image.style.transform === 'scale(1.5)') {
+                image.style.transform = 'scale(1)'; // Reset zoom
+            } else {
+                image.style.transform = 'scale(1.5)'; // Zoom in
+            }
+        }
+
+    </script>
+
+    <script>
+        // Functions here: 1. Lazy loading Images 
+
+        const lazyLoadImages = () => {
+            const lazyImages = document.querySelectorAll('.lazy');
+            const io = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove('lazy');
+                        lazyImage.style.opacity = 1;
+                        observer.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(image => {
+                io.observe(image);
+            });
+        };
+
+        window.addEventListener('load', lazyLoadImages);
+
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const animatedElements = document.querySelectorAll('.animation2');
+        animatedElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+    {% endblock %}
+

@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+<head>
+
+    {% block header %}
+    <title>How we Work</title>
+    <link rel="canonical" href="https://www.sifafx.com/howwework">
+    <meta name="title" content="How We Work">
+    <meta name="description" content="Explore cutting-edge automated trading solutions tailored for your success.">
+    <meta property="og:title" content="How We Work">
+    <meta property="og:description" content="Explore our process">
+    {% endblock %}
+
+{% block custom_styles %}
+    <style>
+        body {
+            font-family: "Raleway", Sans-serif;
+            box-sizing: border-box;
+
+        }
+
+        body.no-scroll {
+
+            overflow-y: hidden;
+
+        }
+
+        .hover-overlay {
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-out;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animation1 {
+
+            animation-name: slideUp;
+            animation-duration: 0.3s;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0s;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        .zoom {
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+
+{% block content %}
+<body class="bg-[#121414] ">
+    
+    <div id="howitworks" class=" relative top-24 pb-44 p-5 align-centre justify-bwtween space-y-6 md:px-36">
+
+        <div class=" animation1 font-light  pt-20 text-[#c19957] text-[28px] mb-2 px-[10px] md:text-5xl  ">
+            Simplifying your trading
+        </div>
+        <div class="animation1 font-light text-white text-xl mb-[10px] px-[10px] md:text-[28px]">
+            Streamlined automated trading solutions
+        </div>
+
+        <div class="text-white text-xl pb-5 px-[10px]">
+
+        </div>
+
+        <div class="flex flex-col gap-8 p-2  md:flex-row">
+            <div id="step1" class="step1 flex flex-col gap-2  " onclick="openModal(1)">
+                <div
+                    class=" flex justify-center transition-opacity ease-linear duration-900 delay-150 hover:opacity-75">
+                    <img src="{{url_for('static', filename='Assets/HowItWorks1.jpeg')}}" alt="Free Virtual Consultation upon Booking"
+                        class="object-cover aspect-[4/5] cursor-pointer zoom ">
+                </div>
+                <div class="mt-[10px] text-white text-2xl ">
+                    Step 1
+                </div>
+                <div class="mt-[10px] text-[#dbdbdb]">
+                    Free Consultation
+                </div>
+                <div class="mt-[10px] text-[#dbdbdb] text-sm underline underline-offset-8 decoration-2 cursor-pointer">
+                    Learn More
+                </div>
+            </div>
+            <div id="step2" class="step2 flex flex-col gap-2" onclick="openModal(2)">
+                <div class="transition-opacity ease-linear duration-900 delay-150 hover:opacity-75">
+                    <img src="{{url_for('static', filename='Assets/HowItWorks2.jpeg')}}" alt="Free Virrual Consultation upon Booking"
+                        class="object-cover aspect-[4/5]">
+
+                </div>
+                <div class="mt-[10px] text-white text-2xl ">
+                    Step 2
+                </div>
+                <div class="mt-[10px] text-[#dbdbdb]">
+                    Partnership Formation
+                </div>
+                <div class="mt-[10px] text-[#dbdbdb] text-sm underline underline-offset-8 decoration-2">
+                    Learn More
+                </div>
+
+            </div>
+            <div id="step3" class="step3 flex flex-col gap-2" onclick="openModal(3)">
+                <div class="transition-opacity ease-linear duration-1000 hover:opacity-70">
+                    <img src="{{url_for('static', filename='Assets/HowItWorks3.jpeg')}}" alt="Free Virrual Consultation upon Booking"
+                        class="object-cover aspect-[4/5]">
+                </div>
+                <div class="mt-[10px] text-white text-2xl ">
+                    Step 3
+                </div>
+                <div class="text-[#dbdbdb]">
+                    Development & Integration Journey
+                </div>
+                <div class="mt-[10px] text-[#dbdbdb] text-sm underline underline-offset-8 decoration-2">
+                    Learn More
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="carousel-modal" class="fixed outer hidden inset-0 top-0 z-50 h-[100%] w-[100%] shadow-lg bg-black/85 md:p-5">
+        <div class="wrapper md:grid grid-cols-2 w-full h-full md:p-[30px] md:bg-black/65  ">
+            <div id="image-div"
+                class="image-div hidden  md:flex md:flex-row md:w-[50%]  md:h-full md:justify-self-center md:items-center  ">
+                <img src="{{url_for('static', filename='Assets/HowItWorks1.jpeg')}}" alt="" class="object-cover h-auto ">
+
+            </div>
+            <div
+                class="bg-black/70 md text-white max-w-md mx-auto p-[30px] md:mx-0  md:w-full md:justify-self-start py-10">
+                <div class="flex justify-end">
+                    <button class="text-white h-[44px] w-[44px] text-4xl z-10000"
+                        onclick="closeModal()">&times;</button>
+
+                </div>
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl">Step <span id="step-number">1</span></h2>
+                </div>
+                <div id="carousel-content" class="pb-56 md:pb-36">
+                    <div class="carousel-item" id="item-1">
+                        <p class="mt-5">
+                            A comprehensive exploration of your trading vision where we analyze your strategy,
+                            understand
+                            your goals, and design the perfect automated solution. During this phase, we work closely
+                            with
+                            you to transform your trading ideas into a concrete implementation plan.
+                        </p>
+                        <ul class="list-disc list-inside mt-5  pl-10">
+                            <li>Free Strategy Consultation</li>
+                            <li>Technical Assessment</li>
+                            <li>Custom Solution Design</li>
+                            <li>Detailed Proposal</li>
+                        </ul>
+                    </div>
+                    <div class="carousel-item hidden" id="item-2">
+                        <p class="mb-4">Establishing a clear and transparent working relationship that protects your
+                            interests and ensures smooth project execution. We formalize our commitment to your success
+                            through detailed agreements and structured payment plans.</p>
+                        <ul class="list-disc list-inside mt-5  pl-10">
+                            <li>Service Agreement Creation</li>
+                            <li>Milestone Planning</li>
+                            <li>Resource Assignment</li>
+                            <li>Project Initialization</li>
+                        </ul>
+                    </div>
+                    <div class="carousel-item hidden" id="item-3">
+                        <p class="mt-4">A collaborative development process where your strategy comes to life through
+                            constant communication and refinement. Our team works hand-in-hand with you to ensure the
+                            final
+                            product exactly matches your trading vision.</p>
+                        <ul class="list-disc list-inside mt-5  pl-10 ">
+                            <li>Regular Progress Updates</li>
+                            <li>Live Testing Sessions</li>
+                            <li>Performance Optimization</li>
+                            <li>Deployment Support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-6 px-4 bg-black/900">
+                    <button id="prev-btn" class="text-white"><i class="fas fa-chevron-left"></i></button>
+                    <span id="carousel-indicator" class="text-white"><span> 1</span> <span>/ </span>
+                        <span>3</span></span>
+                    <button id="next-btn" class="text-white "><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endblock %}
+
+
+   
+    {% block customScript %} 
+    <script>
+        
+
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const stepNumber = document.getElementById('step-number');
+        const carouselIndicator = document.getElementById('carousel-indicator');
+
+        function openModal(index) {
+            const carouselModal = document.getElementById('carousel-modal');
+            carouselModal.classList.remove('hidden');
+            document.body.classList.add("no-scroll");
+
+
+            // Set the current index to the clicked slide's index
+            carouselItems[currentIndex].classList.add('hidden'); // Hide the currently visible slide
+            currentIndex = index - 1; // Update the current index
+            console.log(index, currentIndex)
+            carouselItems[currentIndex].classList.remove('hidden'); // Show the selected slide
+            updateIndicator(); // Update the indicator
+        }
+
+        function closeModal() {
+            const carouselModal = document.getElementById('carousel-modal');
+            carouselModal.classList.add('hidden');
+            document.body.classList.remove("no-scroll");
+
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            carouselItems[currentIndex].classList.add('hidden');
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.remove('hidden');
+            updateIndicator();
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            carouselItems[currentIndex].classList.add('hidden');
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            carouselItems[currentIndex].classList.remove('hidden');
+            updateIndicator();
+        });
+
+        function updateIndicator() {
+            stepNumber.textContent = currentIndex + 1;
+            carouselIndicator.textContent = `${currentIndex + 1} / ${carouselItems.length}`;
+        }
+
+        let startX = 0;
+        let endX = 0;
+
+        // Detect the start of a touch
+        carouselItems.forEach((item) => {
+            item.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            // Detect the end of a touch and determine direction
+            item.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+        });
+
+        function handleSwipe() {
+            const threshold = 50; // Minimum swipe distance
+            const swipeDistance = endX - startX;
+
+            if (swipeDistance > threshold) {
+                // Swipe right (previous slide)
+                document.getElementById('prev-btn').click();
+            } else if (swipeDistance < -threshold) {
+                // Swipe left (next slide)
+                document.getElementById('next-btn').click();
+            }
+        }
+
+        let lastTap = 0;
+
+        carouselItems.forEach((item) => {
+            const image = item.querySelector('img');
+
+            // Double-tap zoom for mobile
+            image.addEventListener('touchend', (e) => {
+                const currentTime = new Date().getTime();
+                const tapInterval = currentTime - lastTap;
+
+                if (tapInterval < 300 && tapInterval > 0) {
+                    toggleZoom(image);
+                }
+                lastTap = currentTime;
+            });
+
+            // Double-click zoom for desktop
+            image.addEventListener('dblclick', () => {
+                toggleZoom(image);
+            });
+        });
+
+        function toggleZoom(image) {
+            if (image.style.transform === 'scale(1.5)') {
+                image.style.transform = 'scale(1)'; // Reset zoom
+            } else {
+                image.style.transform = 'scale(1.5)'; // Zoom in
+            }
+        }
+
+
+
+    </script>
+    {% endblock %}
+</body>
+
+
+</html>

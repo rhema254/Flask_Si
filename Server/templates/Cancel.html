@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+<head>
+    {% block header %}  
+    <title>Sifafx|Cancel Appointment</title>
+    <link rel="canonical" href="https://www.sifafx.com/">
+    <meta name="title" content="Sifafx | Cancel Appointment">
+    <meta name="description" content="Cancel your Appointment">
+    <meta property="og:title" content="Sifafx | Cancel Appointment">
+    <meta property="og:description" content="Cancel your Appointment">
+    {% endblock %}
+
+    {% block custom_styles %}
+    <style>
+        body {
+            font-family: "Raleway", serif;
+
+        }
+
+        @keyframes comeUp {
+            from {
+                transform: translateY(200px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+
+        .animation1 {
+            animation-name: comeUp;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        .animation1 .animate {
+            opacity: 0;
+        }
+
+
+    
+        .delay11 {
+            animation: comeUp .6s ease-in-out 0.4s;
+        }
+
+
+/* Spinner animation */
+.spinner {
+    border-width: 4px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+      
+    </style>
+     {% endblock %}
+    
+  
+</head>
+<body>
+
+    {% block content %}
+    <div class="relative text-left text-white h-[50vh] lg:h-[60vh] w-full " id="home">
+        <div class=" relative h-full w-full justify-items-center top-12 ">
+
+            <img src="{{url_for('static',filename='Assets/hero_image.jpeg')}}"
+                alt="Office interior with a large table and chairs, and a sofa in the background"
+                class="grayscale w-full h-full object-cover brightness-[65%] " />
+
+                <div class="flex w-full content p-6 absolute top-24 lg:top-28 lg:px-80 ">
+                    <h1
+                        class="text-[40px] text-center  font-light md:text-[56px] md:w-full md:text-center  lg:text-center lg:text-[4.5rem] mb-2.5 animation1 delay11 w-full lg:w-full ">
+                        Cancel Appointment
+                    </h1>
+                  
+                </div>
+           
+        </div>
+
+    </div>
+   
+    <section
+    class=" text-[#dbdbdb] bg-[#121414]  pb-8  pt-24 md:pt-28 lg:pt-12 lg:pb-12 px-4 sm:px-20 md:px-40 lg:px-72 ">
+    <div id="canceldata" class="w-full text-center mb-5 pt-16 tracking-wide px-3">
+       
+    </div>
+    
+    <div class="text-center">
+        <button type="submit" id="cancel-button" onclick="cancelBooking()"
+        class="hover:bg-[#c19957] w-4/7 lg:w-2/5 mt-4 text-white text-[16px] py-4 lg:py-3 px-8 border-2 border-[#c19957] tracking-widest">
+        Cancel Appointment 
+        
+    </button>
+</div>
+<div id="loading-overlay" class="hidden  bg-black bg-opacity-50 z-50 items-center justify-center">
+    <div class=" relative spinner border-4 border-t-[#c19957] border-white w-1 h-1 rounded-full animate-spin"></div>
+</div>
+
+</section>
+{% endblock %}
+
+{% block Footer %}
+<footer class="bg-black text-white max-h-xl h-2/4 p-5 grid grid-cols-1 items-center justify-center">
+    <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-col md:flex-row md:justify-around md:items-center w-full max-w-4xl px-4 py-8 
+        lg:justify-between">
+            <div class="text-center md:text-center mb-8 md:mb-0">
+                <h1 class="text-start text-lg tracking-widest ">Sifafx</h1>
+            </div>
+            <div class="text-start mb-8 md:mb-0">
+                <h1 class="text-xl mb-1">Location</h1>
+                <a href="https://maps.app.goo.gl/PZDb1RLe51Rx76e7A" class="underline underline-offset-4">Nairobi
+                    KE</a>
+            </div>
+            <div class="text-start md:text-right">
+                <h1 class="text-xl font-light tracking-wider mb-1">Reach out</h1>
+                <p><a href="mailto:admin@sifax.com" class="underline underline-offset-4">admin@sifafx.com</a></p>
+                <p><a href="tel:+254717820960" class="underline underline-offset-4">+254717829969</a></p>
+            </div>
+        </div>
+
+    </div>
+</footer>
+{% endblock %}
+
+    {% block customScript %}
+        <script src="{{url_for('static', filename='config.js')}}"></script>
+        <script src="{{url_for('static', filename='cancel.js')}}" ></script>
+    {% endblock %}
+
+    {% block SuccessMessageScript %} {% endblock %}

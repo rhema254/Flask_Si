@@ -1,0 +1,431 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Request Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='output.css')}}">
+
+
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{url_for('static', filename='Assets/favicon_io/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{url_for('static', filename='Assets/favicon_io/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{url_for('static', filename='Assets/favicon_io/favicon-16x16.png')}}">
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico')}}">
+    <link rel="manifest" href="{{url_for('static', filename='Assets/favicon_io/site.webmanifest')}}">
+    <link rel="canonical" href="https://www.sifafx.com/Booking">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta content="origin-when-cross-origin" name="referrer">
+    <meta name="title" content="Meeting Request Form">
+    <meta name="description" content="Book an Appointment with us Today!">
+    <meta property="og:title" content="Meeting Request Form">
+    <meta property="og:description" content="Book an Appointment with us Today!">
+    <meta property="og:image:secure_url"
+        content="https://res.cloudinary.com/dwaet6cyt/image/upload/v1736273830/Sifafx_image_ug5oh1.png">
+    <meta property="og:image" content="https://res.cloudinary.com/dwaet6cyt/image/upload/v1736273655/logo_t3qzjl.png">
+
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .small {
+            display: grid;
+            grid-template-columns: 3;
+            width: 5rem;
+
+        }
+
+        @media (max-width:319px) {
+
+            #previous-week,
+            #next-week,
+            .day {
+                padding: 8px;
+
+            }
+        }
+
+        @media (min-width:350px) {
+
+            #previous-week,
+            #next-week,
+            .day {
+                padding: 14px;
+
+            }
+        }
+
+        @media (min-width:415px) {
+
+            #previous-week,
+            #next-week,
+            .day {
+                padding: 18px;
+
+            }
+        }
+
+        @media (min-width:483px) {
+            .day {
+                padding: 20px;
+
+            }
+        }
+
+        @media (min-width:554px) {
+            .day {
+                padding: 20px;
+
+            }
+
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animation2 {
+
+            animation-name: slideUp;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        .animation2 .animate {
+            opacity: 0;
+        }
+
+        .delay {
+            animation: slideUp .8s ease-in-out .4s;
+        }
+    </style>
+</head>
+
+<body class="">
+    <!-- Navbar -->
+
+    <nav class="fixed top-0 left-0 w-full bg-black py-7 px-4 z-50 lg:px-10">
+        <div class="flex justify-between items-center  space-x-7  ">
+            <!-- Logo -->
+            <div><a href="{{ url_for('home') }}" class="text-white text-lg font-light">SifaFx</a></div>
+
+            <!-- Desktop Menu - Hidden on medium and small screens -->
+            <div class="hidden lg:flex space-x-6">
+                <a href="{{ url_for('home') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">Home</a>
+
+                <a href="{{ url_for('home') }}#about"
+                    class="text-white text-sm lg:tracking-widest  font-light hover:underline underline-offset-8 decoration-2">About</a>
+                <a href="{{ url_for('services') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">Services</a>
+                <a href="{{ url_for('howwework') }}"
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">How
+                    We Work</a>
+            </div>
+
+            <!-- Desktop Appointment Button - Hidden on medium and small screens -->
+            <a href="{{ url_for('booking') }}"
+                class="hidden lg:flex border border-white py-2 px-2 text-white text-md font-light tracking-widest transition-colors duration-300 hover:bg-[#c19957] hover:text-black hover:border-transparent">
+                Book Appointment
+            </a>
+
+            <!-- Hamburger Menu - Visible only on medium and small screens -->
+            <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+
+
+    <!-- Full-screen Mobile Menu -->
+
+    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden">
+        <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
+            <a href="{{ url_for('home') }}" class="text-white text-md font-light  border-b w-full pb-2">Home</a>
+            <a href="{{ url_for('home') }}#about" class="text-white text-md font-light border-b w-full pb-2">About</a>
+            <a href="{{ url_for('services') }}" class="text-white text-md font border-b w-full pb-2">Services</a>
+            <a href="{{ url_for('howwework') }}" class="text-white text-md font-light">How We Work</a>
+            <a href="{{ url_for('booking') }}"
+                class=" w-full border border-white py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-[#c19957] hover:text-black hover:border-transparent">
+                Book Appointment
+            </a>
+
+        </div>
+    </div>
+
+
+    <section
+        class="form-calendar calendar text-[#dbdbdb] bg-[#121414]  pb-8 text-md pt-20 md:pt-28 lg:pt-32 px-4 sm:px-20 md:px-40 lg:px-72 ">
+
+        <div class="px-2 pt-5">
+            <div class="pt-5 font-light text-[28px] md:text-[40px] lg:text-[48px]   text-[#c19957] mb-3 animation2 delay"
+                id="selectDate">Meeting request form</div>
+        </div>
+        <div class="px-2 ">
+            <div class="text-md mb-3 md:text-[22px] lg:text-[28px] font-light animation2 delay">We look forward to
+                meeting with you</div>
+        </div>
+
+        <div class="px-2">
+
+            <div class="pt-5  text-md font-bold mb-[5px]">Select a date and time<span class="text-red-500">*</span>
+            </div>
+
+            <form class="booking-form" id="booking-form" action="">
+                <div class="border-x border-y border-white w-full mb-8">
+
+
+                    <div id="currentDate" class="p-2 font-semibold text-lg bg-[#caac8f]"></div>
+
+                    <div class="p-2 ">
+
+                        <div class="flex items-center justify-between mb-5 ">
+                            <!-- Fix the id prev and next sliders. Gap removed -->
+                            <div class="sliders-btn  flex items-center justify-between space-x-4">
+
+                                <div id="prev-month" class="fas fa-chevron-left text-md text-center cursor-pointer ">
+                                </div>
+                                <div class="text-xl">|</div>
+                                <div id="next-month" class="fas fa-chevron-right text-md  text-center  cursor-pointer">
+                                </div>
+
+                                <div id="current-month" class="text-[18px]"></div>
+                            </div>
+                        </div>
+
+
+                        <div id="day-elements" class=" grid grid-cols-9 text-center  mb-2">
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class=" text-[8px] text-transparent md:text-[14px]">ui</div>
+                                <div id="previous-week"
+                                    class="flex text-[12px]  w-6 h-6 items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                    <i class="fas fa-chevron-left  cursor-pointer"></i>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Mon</div>
+                                <div value="" id="day1"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Tue</div>
+                                <div value="" id="day2"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Wed</div>
+                                <div value="" id="day3"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Thu</div>
+                                <div value="" id="day4"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Fri</div>
+                                <div value="" id="day5"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Sat</div>
+                                <div value="" id="day6"
+                                    class="day text-[12px] md:text-[16px] w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-[8px] md:text-[14px]">Sun</div>
+                                <div id="day7"
+                                    class="day text-[12px] md:text-[16px]   w-6 h-6 flex items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full  cursor-pointer">
+                                </div>
+
+                            </div>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="text-transparent text-[8px] md:text-[14px]"> ui</div>
+                                <div id="next-week"
+                                    class="flex text-[12px] w-6 h-6 items-center justify-center sm:w-10 sm:h-10 border border-gray-400 rounded-full">
+                                    <i class="fas fa-chevron-right cursor-pointer"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-black-800 p-4  ">
+                            <div class="grid grid-cols-3  sm:grid-cols-3  md:grid-cols-3 lg:grid-cols-3 gap-4 "
+                                id="timeSlots">
+
+                            </div>
+
+                            <div class="no-availability hidden content-center  justify-center w-full h-2/5 space-y-4"
+                                id="no-availability">
+
+                                <img width="80" height="80" src="https://img.icons8.com/ios-filled/50/calendar--v1.png"
+                                    class="bg-white justify-self-center " alt="calendar--v1" />
+                                <p class="justify-self-center text-[18px]">No availabilty. Please try another day.</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="timezone-select flex p-2 sm:w-3/6 md:w-4/6 lg:w-2/5   ">
+
+                        <i class='bx bx-globe font-bold '></i><select name="timezone" id="timezone"
+                            class="bg-[#121414] text-sm w-4/5 justify-self-center">
+
+                        </select><span class="text-red-500">*</span>
+                        <input id="timezonefield" type="text" value="" hidden />
+
+                    </div>
+                </div>
+                <div id="input-section">
+                    <div class="mb-6 ">
+                        <label class="block text-sm font-bold mb-2 md:text-[16px] ">Name <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="fullname"
+                            class="w-full bg-[#121414] border-b border-white hover:border-[#c19957] md:text-[16px] p-2"
+                            value="" placeholder="John Smith" pattern="^[a-zA-Z ]+" maxlength="30" minlength="5"
+                            title="Min:5 Max:30 alphabetic characters are allowed" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 md:text-[16px]">Email address <span
+                                class="text-red-500">*</span></label>
+                        <input type="email"
+                            class="w-full bg-[#121414] border-b border-white hover:border-[#c19957] md:text-[16px] p-2"
+                            placeholder="email@website.com" value="" minlength="5" maxlength="80" required>
+
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 md:text-[16px]">Phone number <span
+                                class="text-red-500">*</span></label>
+                        <input type="tel" id="phoneInput"
+                            class="w-full bg-[#121414] border-b border-white hover:border-[#c19957] md:text-[16px] p-2"
+                            placeholder="555-555-5555" inputmode="numeric" pattern="[0-9]*" minlength="10"
+                            maxlength="10" required onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            title="Only 10 numeric characters are allowed ">
+
+                    </div>
+
+                    <div class="mb-6 pb-6 bg-[#121414] border-b border-white hover:border-[#c19957]">
+                        <label class="block text-sm font-medium mb-2 md:text-[16px]">Which service or services are you
+                            interested
+                            in?</label>
+                        <div class="flex flex-col space-y-2">
+                            <label class="flex items-center ">
+                                <input type="checkbox" class="form-checkbox  bg-[#121414]" value="Strategy Automation">
+                                <span class="ml-2">Strategy Automation</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]"
+                                    value="Market Data Analysis Tools">
+                                <span class="ml-2">Market Data Analysis Tools</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]"
+                                    value="Testing and Optimization">
+                                <span class="ml-2">Testing & Optimization</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#19a0a0]"
+                                    value="Risk Management Integration">
+                                <span class="ml-2">Risk Management Integration</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]"
+                                    value="Multi-Platform Development">
+                                <span class="ml-2">Multi-Platform Development</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]"
+                                    value="Machine Learning and Ai Integration">
+                                <span class="ml-2">Machine Learning and AI Intergration</span>
+                            </label>
+                            <label class="flex items-center ">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]"
+                                    value="Api Integration Services">
+                                <span class="ml-2">API Integration Services</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox bg-[#121414]" value="Other">
+                                <!-- Add tooltip here -->
+                                <span class="ml-2">Other Service</span>
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 ">
+                        <label class="block text-sm font-medium mb-2">Message</label>
+                        <textarea id="description"
+                            class="w-full bg-[#121414] border-b border-white hover:border-[#c19957] md:text-[16px] p-2 h-24"
+                            required autocorrect="on" spellcheck="true" maxlength="300" autocapitalize="sentences"
+                            placeholder="A brief description of the service you're looking for. Maximum 300 characters"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-[#c19957] w-full text-white text-[16px] py-2 px-4 rounded">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div> </div>
+
+    <script src="{{url_for('static', filename='timezones.js')}}"></script>
+    <script src="{{url_for('static', filename='config.js')}}"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <script src="{{url_for('static', filename='calendar.js')}}"></script>
+
+
+    <script>
+
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

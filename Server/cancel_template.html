@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmation</title>
+</head>
+<body style="background-color: white; font-family: 'Raleway', serif; padding: 16px; display: grid; justify-items: center; align-items: center; background-color: #ffffff;">
+    <div style="width: 100%; padding: 32px; display: grid; justify-items: center; align-items: center; background-color: rgb(255, 255, 255); max-width: 80%;">
+        <div style="display: grid; color: #585769; background-color: white; width: 100%; max-width: 80%; text-align: right; font-size: 14px; letter-spacing: 0.05em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; font-weight: bold; padding: 32px 0; border-top: solid 2px #bfbfc5;">
+            APPOINTMENT
+        </div>
+
+        <div style="display: grid; justify-content: center; max-width: 80%; padding-bottom: 24px; background-color: #ffffff;">
+            <img src="https://res.cloudinary.com/dwaet6cyt/image/upload/v1736658289/booking_g7bs1m.jpg" alt="Image of an Appointment Book" style="width: 100%; max-width: 600px;">
+        </div>
+
+        <div style="width: 100%; padding: 24px; max-width: 80%; display: grid; justify-items: center; align-items: center;">
+            <h3 style="font-size: 22px; color: black; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; margin-bottom: 16px;">
+                Your appointment set for {{ date }} at {{ time }} has been cancelled.
+            </h3>
+            <p style="font-size: 16px; color: #585769; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; margin-top: 16px;">
+                You can always book a new appointment from <a href="{{ frontend }}/Homepage.html" style="text-decoration: underline; text-underline-offset:2px; ">Our website</a>at any time. We hope to see you soon!
+            </p>
+
+
+           
+        </div>
+    </div>
+</body>
+</html>

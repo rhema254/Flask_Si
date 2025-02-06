@@ -1,0 +1,98 @@
+
+{% extends 'base_service.html' %}
+
+<head>
+
+    {% block header %}
+    <title>API Integration Services</title>
+    <link rel="canonical" href="https://www.sifafx.com/Services/Api">
+    <meta name="title" content="API Integration Services">
+    <meta name="description" content="API Integration Services">
+    <meta property="og:title" content="API Integration">
+    <meta property="og:description" content="API Integration Services">
+    {% endblock %}
+    
+    {% block custom_styles %}
+
+    <style>
+        body {
+            font-family: "Raleway", Sans-serif;
+            box-sizing: border-box;
+            
+        }
+
+        .font-raleway {
+            font-family: "Raleway", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+
+
+        }
+
+        .font-raleway-small {
+            font-family: "Raleway", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+            color: #dbdbdb;
+        }
+        </style>
+    {% endblock %}
+
+</head>
+
+<body class="text-white bg-[#1c1f1f] flex-col">
+
+
+    {% block content %}
+   
+    <div class="bg-[#1c1f1f] text-[#dbdbdb] p-5 pt-24 md:flex md:flex-row md:justify-center md:align-center ">
+        <div class="container  py-6 md:py-20 md:flex-initial">
+
+            <div class="grid grid-cols-2 md:grid-cols-3 md:gap-4 px-2.5">
+
+                <div class="w-full h-full order-1 mb-5 md:flex md:flex-row  md:justify-center md:align-center
+                 ">
+
+                    <img alt="Close-up of a computer motherboard with various components" src="{{url_for('static', filename='Assets/Service2.jpeg')}}"
+                        class="object-cover w-96 h-full mb-4 md:mb-0  aspect-[4/5] md:md:w-4/5 md:h-4/5 lg:w-[200px] lg:h-5/6  " />
+
+                </div>
+                <div class="col-span-2 gap-4 order-2 lg:w-5/6">
+                    <h1 class="text-5xl font-raleway text-[#C19957] mt-5 mb-2.5 lg:mt-0">API Integration Services</h1>
+                    <p class="text-xl text-white font-light mb-2 ">From $800</p>
+                    <p class="text-[#dbdbdb]"> 
+                        We develop custom API solutions to connect your trading systems with various data sources,
+                        brokers, and third-party services. This includes real-time market data feeds, order execution
+                        APIs, and custom interfaces for proprietary trading platforms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="bg-[#C19957] text-[#dbdbdb] p-8 h-1/6 lg:h-2/6">
+        <div class="flex justify-between">
+            <div>
+                <p class="font-bold"></p>
+            </div>
+            <div>
+                <p class="font-bold"></p>
+                <p></p>
+            </div>
+            <div>
+                <p class="font-bold"></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+</body>
+
+</html>
