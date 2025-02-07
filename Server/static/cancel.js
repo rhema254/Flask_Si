@@ -1,10 +1,10 @@
 // const apiURL = config.apiUrl;
 
 
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
+// function getQueryParam(param) {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     return urlParams.get(param);
+// }
 
 async function cancelBooking() {
     const button = document.getElementById("cancel-button");
@@ -50,7 +50,7 @@ async function cancelBooking() {
 // console.log("Booking ID:", bookingId);
 
 const bookingId = window.location.pathname.split("/").pop()
-
+console.log(bookingId)
 
 const cancel_body = {status:'Cancelled'};
 
@@ -58,17 +58,18 @@ const cancel_body = {status:'Cancelled'};
 async function fetchBookingDetails(bookingId) {
     try {
         const response = await fetch(`/bookings/${bookingId}`);
-        if (!response.ok) {
+        
+        if (response.ok) {
             throw new Error('Failed to fetch booking details');
         }
 
-         const bookingDetails = await response.json();
+        const bookingDetails = await response.json();
         
-    
+        
         const bookedDate = new Date(bookingDetails.date);
         const formattedBookedDate = bookedDate.toLocaleDateString('en-us', {month: 'long', day:'numeric', year:'numeric' });
-
-
+        
+        
         const [hours, minutes] = (bookingDetails.time).split(":").map(Number);
         const period = hours >= 12 ? "pm" : "am";
         const formattedHours = hours % 12 || 12; // '0' becomes '12' in 12-hour format

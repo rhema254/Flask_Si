@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 
 app.config.from_object(DevConfig)
-api.init_app(app, version='1.0', title='SifaFX APIs', contact='support@sifafx.com')
+# api.init_app(app, version='1.0', title='SifaFX APIs', contact='support@sifafx.com')
 CORS(app)
 db.init_app(app)
 migrate.init_app(app, db)
@@ -129,18 +129,26 @@ def patch(id):
             reschedule_mail(fullname, email, new_date, new_time, id)
         
 
-        return updated_booking, 200
+        return jsonify({
+            
+            "id": updated_booking.id,
+            "fullname": updated_booking.fullname,
+            "email": updated_booking.email,
+            "phone": updated_booking.phone,
+            "date": updated_booking.date.strftime('%Y-%m-%d'),
+            "time": str(updated_booking.time),
+            "timezone": updated_booking.timezone,
+            "services": updated_booking.services,
+            "description": updated_booking.description
+
+        }), 200
 
 
 
-@api.route('/Cancel/<int:id>', methods=['PUT'])
-class bookingResource(Resource):
-
-    @api.expect(booking_model)
-    @api.marshal_with(booking_model)
-    def put(self, id):
+@app.route('/Cancel/<int:id>', methods=['PUT'])
+def put(id):
         """ Update the booking to cancelled """
-        data = api.payload
+        data = request.get_json()
         id = id
         booking_to_update = Booking.query.get_or_404(id)
         
@@ -157,13 +165,20 @@ class bookingResource(Resource):
         cancel_mail(email, new_date, new_time)
 
 
-        return booking_to_update, 200
+        return jsonify({
+            'message': f'The Appoinment is by {booking_to_update.email}'
+        }), 200
 
+@app.route('/', methods=['GET'])
+def index():
+    
+    return render_template('Homepage.html')
 
 @app.route('/Homepage', methods=['GET'])
 def home():
     
     return render_template('Homepage.html')
+
 
 
 @app.route('/Services/Api_Integration', methods=['GET'])
@@ -180,9 +195,9 @@ def booking():
 @app.route('/Cancel/<int:id>', methods=['GET'])
 def cancel(id):
 
-    booking_id = Booking.query.get_or_404(id)
+    booked_id = Booking.query.get_or_404(id)
     
-    return render_template('Cancel.html', booking_id=booking_id)
+    return render_template('Cancel.html', booking_id=booked_id)
 
 @app.route('/HowWeWork', methods=['GET'])
 def howwework():

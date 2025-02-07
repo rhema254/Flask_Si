@@ -25,9 +25,9 @@ def send_mail(fullname, email, date, time_12, id):
     receiver_email = email
     
     token = id
-    Reschedule = f"{frontend}/Reschedule?id={token}"
+    Reschedule = f"{frontend}/Reschedule/{token}"
     print(Reschedule)
-    Cancel = frontend + "/Cancel?id=" + str(token)
+    Cancel = frontend + "/Cancel/" + str(token)
 
     with open(booking_path, "r") as file:
         email_template = Template(file.read())

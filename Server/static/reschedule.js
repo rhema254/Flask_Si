@@ -48,7 +48,7 @@ document.getElementById("reschedule-form").addEventListener("submit", async func
 
             // Redirect to the homepage after a small delay (optional for smoother transition)
             setTimeout(() => {
-                window.location.href = 'Homepage.html';
+                window.location.href = '/Homepage';
             }, 1500); //   
         console.log(result);
         } else {
