@@ -1,16 +1,16 @@
-"""create db
+"""Deploy database
 
-Revision ID: 40d338d1c152
+Revision ID: 25c6b2a3b7fb
 Revises: 
-Create Date: 2025-02-05 05:26:38.523272
+Create Date: 2025-03-08 04:07:03.654980
 
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '40d338d1c152'
+revision = '25c6b2a3b7fb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,15 +22,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('fullname', sa.String(length=30), nullable=False),
     sa.Column('email', sa.String(length=80), nullable=False),
-    sa.Column('phone', sa.String(length=10), nullable=True),
+    sa.Column('phone', sa.String(length=15), nullable=True),
     sa.Column('date', sa.Date(), nullable=False),
     sa.Column('time', sa.Time(), nullable=False),
     sa.Column('timezone', sa.String(length=30), nullable=False),
     sa.Column('description', sa.String(length=400), nullable=False),
-    sa.Column('meet_link', sa.String(length=60), nullable=True),
-    sa.Column('status', sa.String(length=10), nullable=False),
+    sa.Column('meet_link', sa.String(length=60), server_default='none', nullable=True),
+    sa.Column('status', sa.Enum('Scheduled', 'Done', 'Cancelled', name='status'), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('services', sa.String(length=300), nullable=False),
+    sa.Column('services', postgresql.ARRAY(sa.String()), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

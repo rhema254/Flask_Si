@@ -77,6 +77,7 @@ const bookingId = window.location.pathname.split("/").pop();
 async function fetchbookingDetails(bookingId) {
     try {
         const response = await fetch(`/bookings/${bookingId}`);
+        
         if (!response.ok) {
             throw new Error('Failed to fetch booking details');
         }

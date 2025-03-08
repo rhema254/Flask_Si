@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from Server.exts import db, api, migrate
 from flask_mail import Mail, Message
 from Server.send_email import send_mail, reschedule_mail, cancel_mail
-
+# from Server.calendar_event import create_calendar_event
 from datetime import datetime, timedelta
 import os
 from Server.admin import admin_blueprint
@@ -49,6 +49,32 @@ def format_date(date_str):
     return formatted_date
 
 
+@app.route('/bookings/<int:id>', methods=['GET'])
+def getdata(id):
+    
+    booking = Booking.query.get_or_404(id)
+    
+    if booking.status =='Cancelled':
+        return 404
+
+    return jsonify({
+        "id": booking.id,
+        "fullname": booking.fullname,
+        "email": booking.email,
+        "phone": booking.phone,
+        "date": booking.date.strftime('%Y-%m-%d'),
+        "time": str(booking.time),
+        "timezone": booking.timezone,
+        "services": booking.services,  # Ensure it's a list
+        "description": booking.description,
+        "status": booking.status.value,  # If status is an Enum, use .value
+        "created_at": booking.created_at.strftime('%Y-%m-%d %H:%M:%S')
+    }), 200
+
+
+
+
+
 @app.route('/Booking', methods=['POST'])
 def post():
 
@@ -58,13 +84,19 @@ def post():
     fullname=data['fullname']
     email=data['email']
     timezone = data['timezone']
-    services=data['services']
+    services =data['services']['services'] if isinstance(data['services'], dict) else data['services']
+    
     phone=data['phone']
     description=data['description']
     time = data['time']
     date = datetime.strptime(data['date'], '%Y-%m-%d').date()
     
-    print(time, date)
+    
+    print(time, date, services)
+# Ensure services is a list
+    
+    print(f"Received services: {services} | Type: {type(services)}")
+
 
     new_booking = Booking(
         fullname=fullname,
@@ -82,7 +114,12 @@ def post():
     print(new_id)
     time_12 = convert_to_12_hour(new_booking.time)
     formatted_date = format_date(date)
+    # meet_link = create_calendar_event(fullname, date, time, timezone, services, description)
     send_mail(fullname,email,formatted_date,time_12,new_id)
+    
+    # new_booking.meet_link = meet_link
+    # new_booking.save()
+
     print(new_booking)
 
     return jsonify({
@@ -95,6 +132,7 @@ def post():
             "timezone": new_booking.timezone,
             "services": new_booking.services,
             "description": new_booking.description,
+            
         }), 201
 
 
@@ -148,16 +186,18 @@ def patch(id):
 @app.route('/Cancel/<int:id>', methods=['PUT'])
 def put(id):
         """ Update the booking to cancelled """
+
         data = request.get_json()
         id = id
         booking_to_update = Booking.query.get_or_404(id)
-        
+
+       
         if not booking_to_update:
             return 404
         
-        for key, value in data.items():
-            if hasattr(booking_to_update, key):
-                setattr(booking_to_update, key, value)
+       
+        booking_to_update.status = 'Cancelled'
+        booking_to_update.update()
                         
         email = booking_to_update.email
         new_time = convert_to_12_hour(booking_to_update.time)
@@ -168,6 +208,7 @@ def put(id):
         return jsonify({
             'message': f'The Appoinment is by {booking_to_update.email}'
         }), 200
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -196,6 +237,11 @@ def booking():
 def cancel(id):
 
     booked_id = Booking.query.get_or_404(id)
+    print("The booking is:" ,booked_id.status)
+
+    if booked_id.status == 'Status.Cancelled':
+        return 404
+        
     
     return render_template('Cancel.html', booking_id=booked_id)
 
