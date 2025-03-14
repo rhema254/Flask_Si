@@ -8,12 +8,11 @@ from flask_sqlalchemy import SQLAlchemy
 from Server.exts import db, api, migrate
 from flask_mail import Mail, Message
 from Server.send_email import send_mail, reschedule_mail, cancel_mail
-# from Server.calendar_event import create_calendar_event
+# from Server.create_event import create_event
 from datetime import datetime, timedelta
-import os
 from Server.admin import admin_blueprint
 from Server.serializers import booking_model
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 app = Flask(__name__)
@@ -47,6 +46,19 @@ def format_date(date_str):
     formatted_date = date_str.strftime("%B %d, %Y")
 
     return formatted_date
+
+def format_to_gmt(date_time_str):
+    
+    # Convert input string to datetime object
+    date_time_obj = datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+
+    # Convert to UTC time
+    date_time_obj_utc = date_time_obj.datetime(timezone.utc())
+
+    # Format as yyyyMMdd'T'HHmmss'Z'
+    formatted_gmt = date_time_obj_utc.strftime("%Y%m%dT%H%M%SZ")
+    
+    return formatted_gmt
 
 
 @app.route('/bookings/<int:id>', methods=['GET'])
@@ -114,11 +126,15 @@ def post():
     print(new_id)
     time_12 = convert_to_12_hour(new_booking.time)
     formatted_date = format_date(date)
-    # meet_link = create_calendar_event(fullname, date, time, timezone, services, description)
+    
+    startDate = date + time
+    endDate = date + time
+    
+    meet_link = create_event(fullname, date, time, timezone, services, description)
     send_mail(fullname,email,formatted_date,time_12,new_id)
     
-    # new_booking.meet_link = meet_link
-    # new_booking.save()
+    new_booking.meet_link = meet_link
+    new_booking.save()
 
     print(new_booking)
 
@@ -132,6 +148,7 @@ def post():
             "timezone": new_booking.timezone,
             "services": new_booking.services,
             "description": new_booking.description,
+            "meet_link":new_booking.meet_link
             
         }), 201
 
@@ -299,6 +316,13 @@ def techSupport():
 def testing():
     
     return render_template('Testing&Optimization.html')
+
+
+@app.route('/callback', methods=['POST', 'GET'])
+def callback():
+    
+    return 'Callback'
+
 
 
 if __name__ == '__main__':

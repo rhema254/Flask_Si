@@ -1,62 +1,78 @@
-# import json
-# from datetime import datetime, timedelta
-# from google.oauth2 import service_account
-# from googleapiclient.discovery import build
-# from decouple import config
-# import uuid
+import datetime
+import os.path
 
-# SCOPES = ["https://www.googleapis.com/auth/calendar"]
-# service_account_file = config("SERVICE_ACCOUNT_FILE")
-# calendar_id = config('CALENDAR_ID')
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
-# def get_calendar_service():
-#     credentials = service_account.Credentials.from_service_account_file(
-#         service_account_file, scopes=SCOPES
-#     )
-#     return build("calendar", "v3", credentials=credentials)
+# If modifying these scopes, delete the file token.json.
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-# def create_calendar_event(fullname, date, time, timezone, services, description):
-#     """Creates a Google Calendar event."""
-#     service = get_calendar_service()
 
-#     if isinstance(time, str):
-        
-#         time = datetime.strptime(time, "%H:%M:%S").time()  # Convert to time object
+def main():
+  """Shows basic usage of the Google Calendar API.
+  Prints the start and name of the next 10 events on the user's calendar.
+  """
+  creds = None
+  # The file token.json stores the user's access and refresh tokens, and is
+  # created automatically when the authorization flow completes for the first
+  # time.
+  if os.path.exists("token.json"):
+    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+  # If there are no (valid) credentials available, let the user log in.
+  if not creds or not creds.valid:
+    if creds and creds.expired and creds.refresh_token:
+      creds.refresh(Request())
+    else:
+      flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+      creds = flow.run_local_server(port=0)
+    # Save the credentials for the next run
+    with open("token.json", "w") as token:
+      token.write(creds.to_json())
 
-#         event_start = datetime.combine(date, time)  # Create full datetime object
-#         event_end = event_start + timedelta(minutes=30)  # Add 30 minutes
-        
-#         # Back to Google Calendar format
-#         event_start = event_start.strftime("%Y-%m-%dT%H:%M:%S")
-#         event_end = event_end.strftime("%Y-%m-%dT%H:%M:%S")
-    
+  try:
+    service = build("calendar", "v3", credentials=creds)
 
-#     event = {
-#         "summary": f"Booking with {fullname}",
-#         "description": f"Services: {services}\n\n{description}",
-#         "start": {
-#             "dateTime": event_start,
-#             "timeZone": timezone
-#         },
-#         "end": {
-#             "dateTime": event_end,
-#             "timeZone": timezone
-#         },
-        
-#         "reminders": {
-#             "useDefault": False,
-#             "overrides": [
-#                 {"method": "email", "minutes": 30},
-#                 {"method": "popup", "minutes": 10}
-#             ]
-#         },
-#         "conferenceData": {
-#         "createRequest": {
-#             "requestId": str(uuid.uuid4()),
-#             "conferenceSolutionKey": {"type":"hangoutsMeet"}
-#         }
-#     }
-#     }
+    event = {
+    'summary': 'Safaricom Decode 2025',
+    'location': 'Nairobi',
+    'description': 'A chance to hear more about Safaricom\'s developer products.',
+    'start': {
+        'dateTime': '2025-03-14T08:00:00+03:00',
+        'timeZone': 'Africa/Nairobi',
+    },
+    'end': {
+        'dateTime': '2025-03-14T09:30:00+03:00',
+        'timeZone': 'Africa/Nairobi',
+    },
+     'attendees': [
+    {'email': 'admiralkrhemaz@gmail.com'},
+    {'email': 'rhematesh@gmail.com'},
+  ],
+   'conferenceData': {
+            'createRequest': {
+                'requestId': 'testing123',  # This should be unique for each request
+                'conferenceSolutionKey': {
+                    'type': 'hangoutsMeet'
+                }
+            }
+        },
+    'reminders': {
+        'useDefault': False,
+        'overrides': [
+        {'method': 'email', 'minutes': 12},
+        {'method': 'popup', 'minutes': 10},
+        ],
+    },
+    }
+    event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
+    print('Event created: %s' % (event.get('htmlLink')))
 
-#     event = service.events().insert(calendarId=calendar_id, body=event, conferenceDataVersion=1).execute()
-#     return event.get("hangoutLink", "")
+  except HttpError as error:
+    print(f"An error occurred: {error}")
+
+
+if __name__ == "__main__":
+  main()

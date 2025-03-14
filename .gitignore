@@ -1,5 +1,10 @@
 node_modules*
 calendarsifafx.json
+credentials.json
+token.json
+credentials2.json
+
+*.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
