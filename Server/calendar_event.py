@@ -92,3 +92,12 @@ def create_event(fullname, start, end, email,services,admin_email):
   
   except HttpError as error:
     print(f"An error occurred: {error}")
+
+
+
+def update_event():
+    pass
+
+
+def cancel_event():
+    pass
