@@ -1,5 +1,7 @@
 import datetime
 import os.path
+import secrets
+
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -11,7 +13,9 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 
-def main():
+
+def create_event(fullname, start, end, email,services,admin_email):
+  
   """Shows basic usage of the Google Calendar API.
   Prints the start and name of the next 10 events on the user's calendar.
   """
@@ -35,25 +39,28 @@ def main():
   try:
     service = build("calendar", "v3", credentials=creds)
 
+    request_id = secrets.token_urlsafe(8)
+
     event = {
-    'summary': 'Safaricom Decode 2025',
-    'location': 'Nairobi',
-    'description': 'A chance to hear more about Safaricom\'s developer products.',
+    'summary': f"Test Meeting with {fullname}",
+    'location': 'Nairobi, Kenya',
+    'description': f"A meeting to discuss the following:\n{services}\n\n ",
     'start': {
-        'dateTime': '2025-03-14T08:00:00+03:00',
-        'timeZone': 'Africa/Nairobi',
+        'dateTime': f'{start}',
+        
     },
     'end': {
-        'dateTime': '2025-03-14T09:30:00+03:00',
-        'timeZone': 'Africa/Nairobi',
+        'dateTime': f'{end}',
+        
     },
      'attendees': [
-    {'email': 'admiralkrhemaz@gmail.com'},
-    {'email': 'rhematesh@gmail.com'},
+    {'email': f"{email}"},
+    {'email': f"{admin_email}"},
+
   ],
    'conferenceData': {
             'createRequest': {
-                'requestId': 'testing123',  # This should be unique for each request
+                'requestId': f"{request_id}",  # This should be unique for each request
                 'conferenceSolutionKey': {
                     'type': 'hangoutsMeet'
                 }
@@ -62,17 +69,25 @@ def main():
     'reminders': {
         'useDefault': False,
         'overrides': [
-        {'method': 'email', 'minutes': 12},
+        {'method': 'email', 'minutes': 24 * 60},
         {'method': 'popup', 'minutes': 10},
         ],
     },
+    'sendUpdates':'all',
     }
-    event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
-    print('Event created: %s' % (event.get('htmlLink')))
 
+    event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
+    
+    print('Event created: %s' % (event.get('hangoutLink')))
+
+    meet_link = event.get('hangoutLink')
+    
+    return_data = {
+      'Event_data': event,
+      'meet_link': f"{meet_link}",
+    }
+
+    return return_data
+  
   except HttpError as error:
     print(f"An error occurred: {error}")
-
-
-if __name__ == "__main__":
-  main()

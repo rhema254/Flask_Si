@@ -17,14 +17,7 @@ class DevConfig(Config):
     Sender_email = config('Sender_email')
     Server_pass= config('Server_pass')
     frontend = config('frontend', 'http://localhost:5000/')
-
-    # SERVICE_ACCOUNT_FILE = config('SERVICE_ACCOUNT_FILE')
-    # CALENDAR_ID = config('CALENDAR_ID')
-    
-    NYLAS_CLIENT_ID = config("NYLAS_CLIENT_ID"),
-    NYLAS_CALLBACK_URI = config("NYLAS_CALLBACK_URI") 
-    api_key = config("NYLAS_API_KEY"),
-    api_uri = config("NYLAS_API_URI"),
+    ADMIN_EMAIL = config('ADMIN_EMAIL')
 
 
 class TestConfig(Config):

@@ -8,11 +8,13 @@ from flask_sqlalchemy import SQLAlchemy
 from Server.exts import db, api, migrate
 from flask_mail import Mail, Message
 from Server.send_email import send_mail, reschedule_mail, cancel_mail
-# from Server.create_event import create_event
+from Server.calendar_event import create_event
 from datetime import datetime, timedelta
 from Server.admin import admin_blueprint
 from Server.serializers import booking_model
 from datetime import datetime, timezone
+import pytz
+
 
 
 app = Flask(__name__)
@@ -30,7 +32,7 @@ mail = Mail(app)
 
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
-
+admin_email = config('ADMIN_EMAIL')
 
 
 
@@ -127,12 +129,24 @@ def post():
     time_12 = convert_to_12_hour(new_booking.time)
     formatted_date = format_date(date)
     
-    startDate = date + time
-    endDate = date + time
     
-    meet_link = create_event(fullname, date, time, timezone, services, description)
+    
+    local_tmz = pytz.timezone(timezone)
+    
+    starttime_str = datetime.strftime(date, "%Y-%m-%d") + 'T' + time
+    starttime_obj = local_tmz.localize(datetime.strptime(starttime_str, "%Y-%m-%dT%H:%M:%S"))
+    start = datetime.strftime(starttime_obj, "%Y-%m-%dT%H:%M:%S%z")
+
+    endtime_obj = starttime_obj + timedelta(minutes=30)
+    end = datetime.strftime(endtime_obj, '%Y-%m-%dT%H:%M:%S%z')
+    
+    print(admin_email, start, end, local_tmz)
+
+
     send_mail(fullname,email,formatted_date,time_12,new_id)
-    
+    calendar_details = create_event(fullname,start, end, email, services, admin_email)
+    meet_link = calendar_details.get('meet_link')
+
     new_booking.meet_link = meet_link
     new_booking.save()
 
