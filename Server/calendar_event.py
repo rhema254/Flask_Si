@@ -69,11 +69,12 @@ def create_event(fullname, start, end, email,services,admin_email):
     'reminders': {
         'useDefault': False,
         'overrides': [
-        {'method': 'email', 'minutes': 24 * 60},
+        {'method': 'email', 'minutes': 60},
         {'method': 'popup', 'minutes': 10},
         ],
     },
     'sendUpdates':'all',
+    'guestsCanSeeOtherGuests': False
     }
 
     event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
