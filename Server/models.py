@@ -39,6 +39,7 @@ class Booking(db.Model):
     status = db.Column(db.Enum(Status), nullable=False, default=Status.Scheduled)
     created_at = db.Column(db.DateTime, default=db.func.now())
     services = db.Column(ARRAY(db.String), nullable=False)  # Using ARRAY instead of a single String
+    
 
     def __repr__(self):
         return f"A Booking for {self.fullname} in timezone {self.timezone} on {self.date} at {self.time} for {self.services}"
