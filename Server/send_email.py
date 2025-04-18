@@ -14,11 +14,30 @@ frontend = config("frontend")
 booking_path = 'Server/booking_template.html'
 reschedule_path = 'Server/reschedule_template.html'
 cancel_path ='Server/cancel_template.html'
-
+developer_email = config('Dev_email')
+error_message = config('error_message')
 
 # def generate_token(id):
 #     secret_key = config("SECRET_KEY")
 #     return jwt.encode({"id": id}, secret_key, algorithm="HS256")
+
+def send_error(email,id):
+    subject = "Google API error: Needs Fresh tokens"
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = developer_email
+    message["Subject"] = subject
+    message["body"] = error_message
+  
+
+    try:
+        with smtplib.SMTP_SSL(smtp_server, port) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, developer_email, message.as_string())
+        print("Email sent successfully!")
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
 
  
 def send_mail(fullname, email, date, time_12, id):

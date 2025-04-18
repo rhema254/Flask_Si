@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             description: description,
         };
 
-        // console.log('Form Data:', formData); 
+        console.log('Form Data:', formData); 
 
         try {
             //3. Sending data to the backend

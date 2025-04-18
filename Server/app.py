@@ -20,9 +20,6 @@ import pytz
 app = Flask(__name__)
 
 
-
-
-
 app.config.from_object(DevConfig)
 # api.init_app(app, version='1.0', title='SifaFX APIs', contact='support@sifafx.com')
 CORS(app)
@@ -33,7 +30,6 @@ mail = Mail(app)
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 admin_email = config('ADMIN_EMAIL')
-
 
 
 def convert_to_12_hour(time_24):
@@ -84,8 +80,6 @@ def getdata(id):
         "status": booking.status.value,  # If status is an Enum, use .value
         "created_at": booking.created_at.strftime('%Y-%m-%d %H:%M:%S')
     }), 200
-
-
 
 
 

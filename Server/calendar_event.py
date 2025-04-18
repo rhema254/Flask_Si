@@ -41,6 +41,9 @@ def create_event(fullname, start, end, email,services,admin_email):
 
     request_id = secrets.token_urlsafe(8)
 
+    for service in services:
+       myServices = service
+
     event = {
     'summary': f"Test Meeting with {fullname}",
     'location': 'Nairobi, Kenya',
@@ -95,9 +98,76 @@ def create_event(fullname, start, end, email,services,admin_email):
 
 
 
-def update_event():
-    pass
+def update_event(event_id, new_start, new_end, new_timezone):
+    """Update an existing event's start, end, and timezone."""
+    creds = None
+    # Check if token.json exists and load credentials
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    
+    # If credentials are not valid, re-authenticate
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save credentials for future runs
+        with open("token.json", "w") as token:
+            token.write(creds.to_json())
+
+    try:
+        service = build("calendar", "v3", credentials=creds)
+
+        event = service.events().get(calendarId='primary', eventId=event_id).execute()
+
+        event['start'] = {
+            'dateTime': new_start,
+            'timeZone': new_timezone
+        }
+        event['end'] = {
+            'dateTime': new_end,
+            'timeZone': new_timezone
+        }
+
+        updated_event = service.events().update(
+            calendarId='primary', 
+            eventId=event_id, 
+            body=event
+        ).execute()
+
+        print('Event updated: %s' % (updated_event.get('hangoutLink')))
+        return updated_event
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        return None
 
 
-def cancel_event():
-    pass
+def cancel_event(event_id):
+    """Cancel or delete an event."""
+    creds = None
+    # Check if token.json exists and load credentials
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    
+    # If credentials are not valid, re-authenticate
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save credentials for future runs
+        with open("token.json", "w") as token:
+            token.write(creds.to_json())
+
+    try:
+        service = build("calendar", "v3", credentials=creds)
+        
+        # Delete the event using event ID
+        service.events().delete(calendarId='primary', eventId=event_id).execute()
+        print(f"Event with ID {event_id} has been deleted.")
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")

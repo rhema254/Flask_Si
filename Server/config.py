@@ -18,6 +18,8 @@ class DevConfig(Config):
     Server_pass= config('Server_pass')
     frontend = config('frontend', 'http://localhost:5000/')
     ADMIN_EMAIL = config('ADMIN_EMAIL')
+    Dev_email = config('Dev_email')
+    error_message = config('error_message')
 
 
 class TestConfig(Config):
