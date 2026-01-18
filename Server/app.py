@@ -320,7 +320,7 @@ def techSupport():
     
     return render_template('TechnicalSupport.html')
 
-@app.route('/Services/Testing&Optimization', methods=['GET'])
+@app.route('/Services/TestingAndOptimization', methods=['GET'])
 def testing():
     
     return render_template('Testing&Optimization.html')
